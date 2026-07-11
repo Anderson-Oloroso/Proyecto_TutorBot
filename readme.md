@@ -1,6 +1,8 @@
-# TutorBot  — Bot de Tutorías en Telegram (n8n)
+# TutorBot 2 — Bot de Tutorías en Telegram (n8n)
 
 Bot conversacional en **Telegram**, construido con **n8n**, que permite a estudiantes registrarse, consultar, cancelar y finalizar tutorías académicas. Toda la información (tutores, disponibilidad, tutorías y sesiones de conversación) se almacena en una **Google Sheet** que actúa como base de datos.
+
+🤖 **Bot en Telegram:** [@Lucia_M_458bot](https://t.me/Lucia_M_458bot)
 
 ![Vista completa del flujo en n8n](./flujo_completo.png)
 
@@ -37,7 +39,7 @@ El bot recuerda en qué paso de la conversación se encuentra cada usuario (grac
 
 ## Cómo usar el bot (guía para el usuario final)
 
-1. **Iniciar conversación**: el estudiante escribe cualquier mensaje al bot de Telegram.
+1. **Iniciar conversación**: el estudiante abre [@Lucia_M_458bot](https://t.me/Lucia_M_458bot) en Telegram y escribe cualquier mensaje.
 2. El bot responde con el **menú principal**:
 
    ```
@@ -268,3 +270,13 @@ El workflow completo cuenta con **81 nodos**, agrupados así:
 | `if` / `switch` | 6 | Enrutamiento según sesión existente, opción del menú o confirmación del usuario |
 
 Puedes ver la captura completa del canvas al inicio de este documento (`flujo_completo.png`).
+
+---
+
+## Limitaciones y mejoras futuras
+
+- No hay manejo de **concurrencia**: si dos usuarios agendan el mismo horario casi simultáneamente, no hay bloqueo pessimista sobre `DISPONIBILIDAD`.
+- El campo `datos_parciales` almacena JSON como texto plano; un error de formato (comillas, tildes) puede romper el `JSON.parse()` en el siguiente paso.
+- No hay comando de **cancelación global** (ej. `/cancelar`) para salir de un flujo a medio camino y volver al menú.
+- No hay recordatorios automáticos (ej. avisar 1 hora antes de la tutoría).
+- Los `id_tutoria` se calculan buscando el máximo existente + 1 en cada ejecución, lo cual no escala bien con mucho volumen concurrente; se recomienda migrar a un generador de IDs atómico si el uso crece.
