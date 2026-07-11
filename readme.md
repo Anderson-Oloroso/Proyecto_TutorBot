@@ -4,7 +4,6 @@ Bot conversacional en **Telegram**, construido con **n8n**, que permite a estudi
 
 🤖 **Bot en Telegram:** [@Lucia_M_458bot](https://t.me/Lucia_M_458bot)
 
-![Vista completa del flujo en n8n](./flujo_completo.png)
 
 ---
 
