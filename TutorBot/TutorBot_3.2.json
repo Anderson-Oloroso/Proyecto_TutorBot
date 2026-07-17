@@ -12,15 +12,15 @@
       "type": "n8n-nodes-base.telegramTrigger",
       "typeVersion": 1.3,
       "position": [
-        -7328,
-        1056
+        -2368,
+        2352
       ],
-      "id": "ff593c44-c8de-4734-ac36-deceec479557",
+      "id": "444659db-435e-4861-abd2-9f30bf3a0154",
       "name": "Telegram Trigger",
       "webhookId": "1a55ddb9-f6cd-4cb5-a36c-8267e9ab893c",
       "credentials": {
         "telegramApi": {
-          "id": "VvDXs9CgpmkDMRM7",
+          "id": "jBaniyvIPGFH8Y1d",
           "name": "Telegram account"
         }
       }
@@ -61,10 +61,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -6704,
-        1056
+        -1744,
+        2352
       ],
-      "id": "9d7ff1bf-f715-4ff1-ad88-69c213c283a3",
+      "id": "066dcdfd-2be8-48d7-93a9-cd5e05269176",
       "name": "If"
     },
     {
@@ -76,10 +76,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -7120,
-        1056
+        -2160,
+        2352
       ],
-      "id": "e57899af-0509-4c0a-b710-c03b46638854",
+      "id": "ca296773-fb11-49b9-ba44-a7265aa8f768",
       "name": "Obtener formato limpio"
     },
     {
@@ -116,15 +116,15 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        -6912,
-        1056
+        -1952,
+        2352
       ],
-      "id": "7ddeb7f2-9324-483e-894f-2bb6a329ddca",
+      "id": "746696ec-294e-49d5-93ed-329e3d9573b8",
       "name": "Buscar por telegram_id",
       "alwaysOutputData": true,
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "HLccA4EGwc4OkXnG",
+          "id": "8C0A96vSy7hQpfve",
           "name": "Google Sheets account"
         }
       }
@@ -220,6 +220,29 @@
                 ],
                 "combinator": "and"
               }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "98187d4a-0e6b-4506-a182-27f088165f1a",
+                    "leftValue": "={{ $('Obtener formato limpio').item.json.mensaje.toString() }}",
+                    "rightValue": "5",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
             }
           ]
         },
@@ -229,10 +252,10 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.4,
       "position": [
-        -5248,
-        -992
+        -368,
+        160
       ],
-      "id": "47224e41-bc68-4ca9-b56d-f6ec167a6833",
+      "id": "9dffdaa3-d3bd-43c4-9b2d-58c52dc9dc9b",
       "name": "4 opciones",
       "alwaysOutputData": false
     },
@@ -265,14 +288,14 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        -4960,
-        -1040
+        -96,
+        16
       ],
-      "id": "e08d9831-fd8f-4f9d-96e6-fbeec9d97774",
+      "id": "7654c26f-6310-474e-9d9b-f9c5c995893f",
       "name": "Obtener datos",
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "HLccA4EGwc4OkXnG",
+          "id": "8C0A96vSy7hQpfve",
           "name": "Google Sheets account"
         }
       }
@@ -306,15 +329,15 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        -4928,
-        -832
+        -64,
+        224
       ],
-      "id": "9a4e2e8a-c54e-456f-b048-eac1d0d30ac9",
+      "id": "b2306ec6-fd0a-40c4-b16b-01dcbc75d39c",
       "name": "Obtener datos1",
       "alwaysOutputData": true,
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "HLccA4EGwc4OkXnG",
+          "id": "8C0A96vSy7hQpfve",
           "name": "Google Sheets account"
         }
       }
@@ -352,14 +375,14 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        -4944,
-        -576
+        -80,
+        480
       ],
-      "id": "39aa7ed7-c654-4bd2-be7f-ac65b49ddded",
+      "id": "4cc5f116-f7a4-4f6d-b8e5-0869aece7d67",
       "name": "Obtener datos2",
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "HLccA4EGwc4OkXnG",
+          "id": "8C0A96vSy7hQpfve",
           "name": "Google Sheets account"
         }
       }
@@ -371,10 +394,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -4768,
-        -1040
+        96,
+        16
       ],
-      "id": "ae6e4f4f-92aa-4171-a099-7d406773a6a0",
+      "id": "ceb7f812-5cb1-4c48-8dc2-3bb1813ac3af",
       "name": "Parsear datos"
     },
     {
@@ -384,10 +407,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -4752,
-        -832
+        112,
+        224
       ],
-      "id": "995c7cab-4fed-45c0-9988-4c6267425f64",
+      "id": "78f60ea8-4d8f-475d-8a28-395b4ee8bcb9",
       "name": "Parsear datos1"
     },
     {
@@ -399,15 +422,15 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        -4384,
-        -1040
+        480,
+        16
       ],
-      "id": "6a79088e-d8f2-4bcc-a50a-599e358176f4",
+      "id": "c28fb4e2-47d0-4c84-89dd-5f4182a0135a",
       "name": "Tutorias registradas",
       "webhookId": "d7bf0191-573e-40bf-b646-b738af59e666",
       "credentials": {
         "telegramApi": {
-          "id": "VvDXs9CgpmkDMRM7",
+          "id": "jBaniyvIPGFH8Y1d",
           "name": "Telegram account"
         }
       }
@@ -421,15 +444,15 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        -4384,
-        -832
+        480,
+        224
       ],
-      "id": "3b47ecf2-5044-442a-a810-4877fafd8288",
+      "id": "294c80a6-d7db-4cc2-93d3-f94c83bfc1f5",
       "name": "Tutorias que se pueden cancelar",
       "webhookId": "d16915de-e51f-47a1-8994-2268bee054da",
       "credentials": {
         "telegramApi": {
-          "id": "VvDXs9CgpmkDMRM7",
+          "id": "jBaniyvIPGFH8Y1d",
           "name": "Telegram account"
         }
       }
@@ -441,10 +464,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -4768,
-        -576
+        96,
+        480
       ],
-      "id": "c2639b06-b571-451b-8936-c7d90a5076a6",
+      "id": "18c21db0-65b0-4a94-8e2a-01d872428279",
       "name": "Parsear datos2"
     },
     {
@@ -476,14 +499,14 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        -4960,
-        -1296
+        -96,
+        -240
       ],
-      "id": "1f4ab2f5-7dc0-4889-971c-c15fb3ed2536",
+      "id": "c45b36fa-c499-4619-b5a1-e7fdc7d5da39",
       "name": "Select Tutores",
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "HLccA4EGwc4OkXnG",
+          "id": "8C0A96vSy7hQpfve",
           "name": "Google Sheets account"
         }
       }
@@ -521,14 +544,14 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        -4752,
-        -1296
+        112,
+        -240
       ],
-      "id": "629b8ea8-7159-4716-a719-3f77010ce713",
+      "id": "0313c2da-09b1-494f-9108-4bae3ee3259b",
       "name": "Select Materias",
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "HLccA4EGwc4OkXnG",
+          "id": "8C0A96vSy7hQpfve",
           "name": "Google Sheets account"
         }
       }
@@ -540,10 +563,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -4560,
-        -1296
+        304,
+        -240
       ],
-      "id": "74f95503-f07e-44b6-8167-4d8fc12cac30",
+      "id": "277a3db7-c172-4388-bf74-8d32657c0efa",
       "name": "Code in JavaScript"
     },
     {
@@ -653,14 +676,14 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        -4384,
-        -1296
+        480,
+        -240
       ],
-      "id": "96afb7a3-ce34-4c41-bfc6-e211ee025006",
+      "id": "a1f970c2-6270-4778-987b-eaa15b352401",
       "name": "Actualizar datos_parciales",
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "HLccA4EGwc4OkXnG",
+          "id": "8C0A96vSy7hQpfve",
           "name": "Google Sheets account"
         }
       }
@@ -674,15 +697,15 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        -4240,
-        -1296
+        624,
+        -240
       ],
-      "id": "f5f7c8b9-90ac-4feb-a902-8a28f576c855",
+      "id": "4ddbc857-3efe-4182-ba9c-c1fccbb95481",
       "name": "Tutorias disponibles1",
       "webhookId": "2af86aa7-1ddd-4807-97db-b946c2726b0b",
       "credentials": {
         "telegramApi": {
-          "id": "VvDXs9CgpmkDMRM7",
+          "id": "jBaniyvIPGFH8Y1d",
           "name": "Telegram account"
         }
       }
@@ -794,14 +817,14 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        -4560,
-        -1040
+        304,
+        16
       ],
-      "id": "f56c1750-75bf-417b-8ada-f0e82563dbae",
+      "id": "24596512-6fb9-420c-b661-9de025394663",
       "name": "Actualizar datos_parciales1",
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "HLccA4EGwc4OkXnG",
+          "id": "8C0A96vSy7hQpfve",
           "name": "Google Sheets account"
         }
       }
@@ -913,15 +936,15 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        -4576,
-        -832
+        288,
+        224
       ],
-      "id": "313f8897-b981-475c-af5a-ffab66d6be16",
+      "id": "e69d80c5-2202-42e5-8894-91493d203c37",
       "name": "Actualizar datos_parciales2",
       "alwaysOutputData": true,
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "HLccA4EGwc4OkXnG",
+          "id": "8C0A96vSy7hQpfve",
           "name": "Google Sheets account"
         }
       }
@@ -1033,14 +1056,14 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        -4560,
-        -576
+        304,
+        480
       ],
-      "id": "0da4e9c5-c911-4e7a-8551-449a65ec7510",
+      "id": "536cf3a6-e29c-476e-87c0-ce61d81a86e0",
       "name": "Actualizar datos_parciales3",
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "HLccA4EGwc4OkXnG",
+          "id": "8C0A96vSy7hQpfve",
           "name": "Google Sheets account"
         }
       }
@@ -1052,10 +1075,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -5408,
-        32
+        -448,
+        1328
       ],
-      "id": "509ec837-f946-4ffa-b031-df755537e42e",
+      "id": "1f881b89-5301-4f0c-8b81-bdbdf5c622f8",
       "name": "Code in JavaScript1"
     },
     {
@@ -1087,15 +1110,15 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        -5456,
-        240
+        -496,
+        1536
       ],
-      "id": "61be61bf-a005-4cdf-b048-e07cf29d22d1",
+      "id": "019c0644-4ad4-44cc-b2ec-b6f954942562",
       "name": "Buscar por id2",
       "alwaysOutputData": false,
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "HLccA4EGwc4OkXnG",
+          "id": "8C0A96vSy7hQpfve",
           "name": "Google Sheets account"
         }
       }
@@ -1107,10 +1130,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -5040,
-        240
+        -80,
+        1536
       ],
-      "id": "16a10b77-bd91-4218-b181-e3cec3a43621",
+      "id": "7e66de6a-2a6d-418c-99ae-876e7de96248",
       "name": "Code in JavaScript2"
     },
     {
@@ -1145,15 +1168,15 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        -4976,
-        32
+        -16,
+        1328
       ],
-      "id": "7bcc540f-fb23-4612-8ec1-d206bc692c3b",
+      "id": "50cdb929-6d0d-4927-aab1-0c0381b1fbeb",
       "name": "Envia confirmacion",
       "webhookId": "3ecf6fef-c474-4d0f-9869-b0a69c6b9aac",
       "credentials": {
         "telegramApi": {
-          "id": "VvDXs9CgpmkDMRM7",
+          "id": "jBaniyvIPGFH8Y1d",
           "name": "Telegram account"
         }
       }
@@ -1181,14 +1204,14 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        -5248,
-        240
+        -288,
+        1536
       ],
-      "id": "106b0cf1-c2dc-45c1-8d60-657676021010",
+      "id": "d01fa0f4-11d6-401d-b4e1-5d0a7f2e2ed1",
       "name": "BUscar id tutoria",
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "HLccA4EGwc4OkXnG",
+          "id": "8C0A96vSy7hQpfve",
           "name": "Google Sheets account"
         }
       }
@@ -1298,14 +1321,14 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        -4832,
-        240
+        128,
+        1536
       ],
-      "id": "f301ea87-e348-43c3-951c-cb0ce4fd7215",
+      "id": "8601e5f9-b1eb-4350-800f-6ace69d59f79",
       "name": "Adjuntar fila a tutorias",
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "HLccA4EGwc4OkXnG",
+          "id": "8C0A96vSy7hQpfve",
           "name": "Google Sheets account"
         }
       }
@@ -1319,15 +1342,15 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        -4464,
-        240
+        496,
+        1536
       ],
-      "id": "fb6a54e6-d927-4c25-8d92-62e174d38293",
+      "id": "e9eb3508-90d0-4e48-8bec-660323c3dc5b",
       "name": "Send a text message",
       "webhookId": "52a4ba57-8302-4a1f-9b20-5806e902d5b2",
       "credentials": {
         "telegramApi": {
-          "id": "VvDXs9CgpmkDMRM7",
+          "id": "jBaniyvIPGFH8Y1d",
           "name": "Telegram account"
         }
       }
@@ -1341,15 +1364,15 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        -5264,
-        544
+        -256,
+        1840
       ],
-      "id": "80d44f02-6488-440a-b90d-6a28579d1e7f",
+      "id": "3399df82-b536-4e5d-8255-9fc68f484db2",
       "name": "Registro cancelado",
       "webhookId": "9fa94b4b-6fa8-4397-8898-6752aafcea11",
       "credentials": {
         "telegramApi": {
-          "id": "VvDXs9CgpmkDMRM7",
+          "id": "jBaniyvIPGFH8Y1d",
           "name": "Telegram account"
         }
       }
@@ -1363,15 +1386,15 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        -4368,
-        -576
+        496,
+        480
       ],
-      "id": "ff8ea8f7-0f8f-49fc-b58d-7a20cb1f6dc1",
+      "id": "4481831d-f6ec-4a1f-80ed-bed1d2ffde8d",
       "name": "Tutorias que se pueden finalizar",
       "webhookId": "d16915de-e51f-47a1-8994-2268bee054da",
       "credentials": {
         "telegramApi": {
-          "id": "VvDXs9CgpmkDMRM7",
+          "id": "jBaniyvIPGFH8Y1d",
           "name": "Telegram account"
         }
       }
@@ -1405,15 +1428,15 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        -5632,
-        768
+        -672,
+        2064
       ],
-      "id": "a846ea4a-1a05-4f88-b6f2-8e5c58ccf8e5",
+      "id": "3beedda1-faf1-4c87-99a5-64c5633f9d91",
       "name": "Buscar por id3",
       "alwaysOutputData": true,
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "HLccA4EGwc4OkXnG",
+          "id": "8C0A96vSy7hQpfve",
           "name": "Google Sheets account"
         }
       }
@@ -1425,10 +1448,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -5456,
-        768
+        -496,
+        2064
       ],
-      "id": "0db0e11f-e85d-43d3-b2c6-e51316ce6b63",
+      "id": "0b6b247a-419d-48b5-a659-8e9a9c9a329b",
       "name": "Code in JavaScript3"
     },
     {
@@ -1463,15 +1486,15 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        -5088,
-        768
+        -128,
+        2064
       ],
-      "id": "89acd6a7-ff57-475f-8532-7319b71401a7",
+      "id": "4ec6be33-806f-4ec3-baa7-795cd9e10ae5",
       "name": "Envia confirmacion1",
       "webhookId": "3ecf6fef-c474-4d0f-9869-b0a69c6b9aac",
       "credentials": {
         "telegramApi": {
-          "id": "VvDXs9CgpmkDMRM7",
+          "id": "jBaniyvIPGFH8Y1d",
           "name": "Telegram account"
         }
       }
@@ -1505,14 +1528,14 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        -5552,
-        1392
+        -592,
+        2688
       ],
-      "id": "4fcfeb5a-f695-45ed-b8d7-9103d66c039f",
+      "id": "155189dc-56dd-481c-bde3-3a361d6b465a",
       "name": "Buscar por id4",
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "HLccA4EGwc4OkXnG",
+          "id": "8C0A96vSy7hQpfve",
           "name": "Google Sheets account"
         }
       }
@@ -1524,10 +1547,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -5376,
-        1392
+        -416,
+        2688
       ],
-      "id": "ddaea1dc-75b3-434f-9b26-c365776212d6",
+      "id": "d4f550f2-7281-4345-abe5-a15fc2fea14e",
       "name": "Code in JavaScript5"
     },
     {
@@ -1562,15 +1585,15 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        -4992,
-        1392
+        -32,
+        2688
       ],
-      "id": "e5410b7b-6b58-4406-84f4-3317664168c9",
+      "id": "3338da8d-e765-4d82-9c70-9d496ba6ab37",
       "name": "Envia confirmacion2",
       "webhookId": "3ecf6fef-c474-4d0f-9869-b0a69c6b9aac",
       "credentials": {
         "telegramApi": {
-          "id": "VvDXs9CgpmkDMRM7",
+          "id": "jBaniyvIPGFH8Y1d",
           "name": "Telegram account"
         }
       }
@@ -1582,10 +1605,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -5296,
-        1552
+        -336,
+        2848
       ],
-      "id": "800a6c66-864e-4075-b988-7ea14fda865e",
+      "id": "63bff17a-9823-4a62-bddf-adacec90e130",
       "name": "Code in JavaScript6"
     },
     {
@@ -1609,14 +1632,14 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        -5488,
-        1552
+        -528,
+        2848
       ],
-      "id": "040d3dd3-9feb-4fac-8945-82754f75a233",
+      "id": "7ef607d9-63f0-4749-adbf-a0d362cb49f8",
       "name": "Tutorias1",
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "HLccA4EGwc4OkXnG",
+          "id": "8C0A96vSy7hQpfve",
           "name": "Google Sheets account"
         }
       }
@@ -1642,7 +1665,8 @@
           "mappingMode": "defineBelow",
           "value": {
             "id_tutoria": "={{ $json.id_tutoria_a_finalizar }}",
-            "estado": "={{ $json.nuevo_estado }}"
+            "estado": "={{ $json.nuevo_estado }}",
+            "puntos": "10"
           },
           "matchingColumns": [
             "id_tutoria"
@@ -1718,6 +1742,16 @@
               "canBeUsedToMatch": true
             },
             {
+              "id": "puntos",
+              "displayName": "puntos",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
               "id": "row_number",
               "displayName": "row_number",
               "required": false,
@@ -1737,14 +1771,14 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        -5120,
-        1552
+        -160,
+        2848
       ],
-      "id": "1a0328df-3209-4c04-8935-fe8c7f457a67",
+      "id": "2917b499-a814-4118-a931-4b22afa941a8",
       "name": "Actualizar estado1",
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "HLccA4EGwc4OkXnG",
+          "id": "8C0A96vSy7hQpfve",
           "name": "Google Sheets account"
         }
       }
@@ -1758,61 +1792,15 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        -4768,
-        1552
+        192,
+        2848
       ],
-      "id": "a3f11aaa-76ba-413c-897d-01f2639b5a1c",
+      "id": "a0071306-7b43-41a7-afed-36bd2ff8753a",
       "name": "Send a text message2",
       "webhookId": "4e2c9527-7ac3-4eed-b66d-de6ebae0881d",
       "credentials": {
         "telegramApi": {
-          "id": "VvDXs9CgpmkDMRM7",
-          "name": "Telegram account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "chatId": "={{ $('Obtener formato limpio').item.json.id_telegram }}",
-        "text": "=Aun no estas registrado❓\nPara proceder, ¿Desea registrarse?",
-        "replyMarkup": "inlineKeyboard",
-        "inlineKeyboard": {
-          "rows": [
-            {
-              "row": {
-                "buttons": [
-                  {
-                    "text": "Registrarse",
-                    "additionalFields": {
-                      "callback_data": "Registrarse"
-                    }
-                  },
-                  {
-                    "text": "Salir",
-                    "additionalFields": {
-                      "callback_data": "Salir"
-                    }
-                  }
-                ]
-              }
-            }
-          ]
-        },
-        "additionalFields": {}
-      },
-      "type": "n8n-nodes-base.telegram",
-      "typeVersion": 1.2,
-      "position": [
-        -6032,
-        1888
-      ],
-      "id": "d59c6b82-39b8-473b-937e-416cd19a89b0",
-      "name": "Send a text message3",
-      "webhookId": "1c782cdb-6697-4ad3-a35e-b3618efc9a05",
-      "alwaysOutputData": true,
-      "credentials": {
-        "telegramApi": {
-          "id": "VvDXs9CgpmkDMRM7",
+          "id": "jBaniyvIPGFH8Y1d",
           "name": "Telegram account"
         }
       }
@@ -1842,7 +1830,7 @@
             "pantalla_actual": "MENU",
             "paso_actual": "1",
             "datos_parciales": "{}",
-            "ultima_actividad": "={{ $today.toFormat(\"dd-MM-yy\") }}"
+            "ultima_actividad": "={{ $today.toFormat(\"dd-MM-yyyy\") }}"
           },
           "matchingColumns": [
             "telegram_id"
@@ -1912,69 +1900,36 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        -6144,
-        1488
+        -1504,
+        2736
       ],
-      "id": "0b5780ee-77a1-4e87-8b9d-6479b8641794",
+      "id": "9ae26947-f949-42b0-92e6-34293288d9dd",
       "name": "Buscar por id5",
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "HLccA4EGwc4OkXnG",
+          "id": "8C0A96vSy7hQpfve",
           "name": "Google Sheets account"
         }
       }
     },
     {
       "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "strict",
-            "version": 3
-          },
-          "conditions": [
-            {
-              "id": "9e8e2225-de27-4f5e-8089-ac71955d2e7e",
-              "leftValue": "={{ $json.mensaje }}",
-              "rightValue": 1,
-              "operator": {
-                "type": "number",
-                "operation": "equals"
-              }
-            }
-          ],
-          "combinator": "and"
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2.3,
-      "position": [
-        -6416,
-        1632
-      ],
-      "id": "e3eb72df-d995-44c4-ab14-52cf54141a34",
-      "name": "If4"
-    },
-    {
-      "parameters": {
-        "chatId": "={{ $('Datos a json7').item.json.id_telegram }}",
-        "text": "✅ Nuevo usuario registrado exitosamente",
+        "chatId": "={{ $('Obtener formato limpio').item.json.chat_id }}",
+        "text": "=Hola {{ $('Obtener formato limpio').item.json.nombre }}, no te pudimos encontrar en nuestra base de datos.\n\nEstamos validando tu información ...\n\nRegistrando ...\n\n✅ Nuevo usuario registrado exitosamente",
         "additionalFields": {}
       },
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        -5968,
-        1488
+        -1328,
+        2736
       ],
-      "id": "eeaa15e8-3846-482d-a566-4eb56dfe7157",
+      "id": "0ba1145c-ab68-4358-a559-825704fae89a",
       "name": "Send a text message4",
       "webhookId": "d84d3f03-9536-4145-9613-dee5c202b5d1",
       "credentials": {
         "telegramApi": {
-          "id": "VvDXs9CgpmkDMRM7",
+          "id": "jBaniyvIPGFH8Y1d",
           "name": "Telegram account"
         }
       }
@@ -2085,14 +2040,14 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        -5184,
-        32
+        -224,
+        1328
       ],
-      "id": "2420d5da-0600-4046-aab3-0205bf3f86fd",
+      "id": "0207742d-fef7-4e02-95bc-7692acfe6020",
       "name": "Actualizar pantalla",
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "HLccA4EGwc4OkXnG",
+          "id": "8C0A96vSy7hQpfve",
           "name": "Google Sheets account"
         }
       }
@@ -2204,14 +2159,14 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        -4656,
-        240
+        304,
+        1536
       ],
-      "id": "a1a8530c-70d8-45ef-9dc4-2283c6978360",
+      "id": "9816b395-b356-4a87-a4a3-6173518de096",
       "name": "Actualizar pantalla1",
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "HLccA4EGwc4OkXnG",
+          "id": "8C0A96vSy7hQpfve",
           "name": "Google Sheets account"
         }
       }
@@ -2219,34 +2174,34 @@
     {
       "parameters": {
         "promptType": "define",
-        "text": "=Eres un Asistente Virtual Inteligente de Tutorías para Telegram. Tu objetivo es resolver dudas generales y guiar al alumno de forma empática, clara y concisa. Responde SIEMPRE en español e incluye emojis educativos de forma amigable (🎓 📚 👨‍🏫 ✨), sin excederte.\n\nCOMPORTAMIENTO (MUY IMPORTANTE)\n1) No repitas saludos.\n   - No digas “Hola”, “Bienvenido”, “¿Cómo estás?” ni menciones “tu nombre” en cada respuesta.\n   - Solo saluda y presenta el menú si el usuario inicia la conversación (primer mensaje del hilo) o si el usuario escribe explícitamente “menú”, “opciones” o “ayuda”.\n2) En conversación continua:\n   - Responde directamente a la pregunta del usuario.\n   - Usa una sola respuesta natural y fluida (sin reenviar el menú completo).\n3) Cuando el usuario necesite operar el sistema:\n   - Si el usuario pregunta qué hacer o no indica una acción, muestra el menú una sola vez.\n   - Si el usuario escribe una opción, actúa en consecuencia y NO vuelvas a enviar el saludo ni el menú completo salvo que sea necesario.\n4) Regla de entrada de opciones:\n   - Si presentas el menú, aclara: “Para elegir, ingresa únicamente números.”\n   - El menú SIEMPRE es:\n     1) Registrar una tutoría 📚\n     2) Ver tus tutorías 📝\n     3) Cancelar una tutoria 🚫\n     4) Finalizar sesión ✨\n5) No inventes datos.\n   - No generes registros falsos ni información específica de asignaciones.\n   - Si falta información necesaria, pide lo imprescindible de forma breve.\n\nFORMATO DE RESPUESTA\n- Máximo 2 párrafos cortos.\n- Si das menú, ponlo como lista numerada y después una frase corta indicando que debe ingresar solo números.\n- No uses disculpas largas ni relleno.\n\nSiempre que no tengas una pregunta, devuelve el menu con un mensaje empatico",
+        "text": "=Eres un Asistente Virtual Inteligente de Tutorías para Telegram. Tu objetivo es resolver dudas generales y guiar al alumno de forma empática, clara y concisa. Responde SIEMPRE en español e incluye emojis educativos de forma amigable (🎓 📚 👨‍🏫 ✨), sin excederte.\n\nCOMPORTAMIENTO (MUY IMPORTANTE)\n1) No repitas saludos.\n   - No digas “Hola”, “Bienvenido”, “¿Cómo estás?” ni menciones “tu nombre” en cada respuesta.\n   - Solo saluda y presenta el menú si el usuario inicia la conversación (primer mensaje del hilo) o si el usuario escribe explícitamente “menú”, “opciones” o “ayuda”.\n2) En conversación continua:\n   - Responde directamente a la pregunta del usuario.\n   - Usa una sola respuesta natural y fluida (sin reenviar el menú completo).\n3) Cuando el usuario necesite operar el sistema:\n   - Si el usuario pregunta qué hacer o no indica una acción, muestra el menú una sola vez.\n   - Si el usuario escribe una opción, actúa en consecuencia y NO vuelvas a enviar el saludo ni el menú completo salvo que sea necesario.\n4) Regla de entrada de opciones:\n   - Si presentas el menú, aclara: “Para elegir, ingresa únicamente números.”\n   - El menú SIEMPRE es:\n     1) Registrar una tutoría 📚\n     2) Ver tus tutorías 📝\n     3) Cancelar una tutoria 🚫\n     4) Finalizar sesión ✨\n     5) Ver y actualizar mis puntos 🎓\n5) No inventes datos.\n   - No generes registros falsos ni información específica de asignaciones.\n   - Si falta información necesaria, pide lo imprescindible de forma breve.\n\nFORMATO DE RESPUESTA\n- Máximo 2 párrafos cortos.\n- Si das menú, ponlo como lista numerada y después una frase corta indicando que debe ingresar solo números.\n- No uses disculpas largas ni relleno.\n\nSiempre que no tengas una pregunta, devuelve el menu con un mensaje empatico",
         "options": {}
       },
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 3.1,
       "position": [
-        -4736,
-        -336
+        192,
+        960
       ],
-      "id": "d5db5da8-30af-4e14-a765-6951251bc017",
+      "id": "9c7550b3-07dc-4303-a2ff-830d6e10bd75",
       "name": "AI Agent"
     },
     {
       "parameters": {
-        "modelName": "models/gemini-3.5-flash",
+        "modelName": "models/gemini-2.5-flash",
         "options": {}
       },
       "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
       "typeVersion": 1.1,
       "position": [
-        -4736,
-        -144
+        192,
+        1152
       ],
-      "id": "e9142982-29b8-4604-9df8-0498fc408668",
+      "id": "1c98bb21-5ffa-4bc4-a017-e57a15838702",
       "name": "Google Gemini Chat Model",
       "credentials": {
         "googlePalmApi": {
-          "id": "CtnofOOTXNwC4dr0",
+          "id": "6nuBPq9EXUX35adG",
           "name": "Google Gemini(PaLM) Api account"
         }
       }
@@ -2260,15 +2215,15 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        -4400,
-        -336
+        528,
+        960
       ],
-      "id": "a7090580-fa77-419f-88d6-db0d25544e85",
+      "id": "2b83808c-4e4c-4fda-b251-2a1d8f280f00",
       "name": "Send a text message6",
       "webhookId": "b18072a7-4a46-4298-a8ee-de8266480f44",
       "credentials": {
         "telegramApi": {
-          "id": "VvDXs9CgpmkDMRM7",
+          "id": "jBaniyvIPGFH8Y1d",
           "name": "Telegram account"
         }
       }
@@ -2281,130 +2236,11 @@
       "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
       "typeVersion": 1.4,
       "position": [
-        -4640,
-        -48
+        288,
+        1248
       ],
-      "id": "dc1b2f32-3694-4981-9b4c-65c42243f9e3",
+      "id": "fe382a46-36d8-4966-8cd9-9f590d4dd133",
       "name": "Simple Memory"
-    },
-    {
-      "parameters": {
-        "operation": "update",
-        "documentId": {
-          "__rl": true,
-          "value": "1Sy-9QIGkl6i24EW5DOCMwk8nAhnUR-U9Gs-KZk5evyc",
-          "mode": "list",
-          "cachedResultName": "TUTORES",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Sy-9QIGkl6i24EW5DOCMwk8nAhnUR-U9Gs-KZk5evyc/edit?usp=drivesdk"
-        },
-        "sheetName": {
-          "__rl": true,
-          "value": 1673536527,
-          "mode": "list",
-          "cachedResultName": "SESSIONS",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Sy-9QIGkl6i24EW5DOCMwk8nAhnUR-U9Gs-KZk5evyc/edit#gid=1673536527"
-        },
-        "columns": {
-          "mappingMode": "defineBelow",
-          "value": {
-            "telegram_id": "={{ $('Obtener formato limpio').item.json.id_telegram }}",
-            "pantalla_actual": "REGISTRO",
-            "paso_actual": "1"
-          },
-          "matchingColumns": [
-            "telegram_id"
-          ],
-          "schema": [
-            {
-              "id": "telegram_id",
-              "displayName": "telegram_id",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "nombre_user",
-              "displayName": "nombre_user",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "pantalla_actual",
-              "displayName": "pantalla_actual",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "paso_actual",
-              "displayName": "paso_actual",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "datos_parciales",
-              "displayName": "datos_parciales",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "ultima_actividad",
-              "displayName": "ultima_actividad",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": true
-            },
-            {
-              "id": "row_number",
-              "displayName": "row_number",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "number",
-              "canBeUsedToMatch": true,
-              "readOnly": true,
-              "removed": true
-            }
-          ],
-          "attemptToConvertTypes": false,
-          "convertFieldsToString": false
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.googleSheets",
-      "typeVersion": 4.7,
-      "position": [
-        -6192,
-        1888
-      ],
-      "id": "b9c0e4ac-e93f-4b3d-99e6-2832601edfd5",
-      "name": "Update row in sheet",
-      "alwaysOutputData": true,
-      "credentials": {
-        "googleSheetsOAuth2Api": {
-          "id": "HLccA4EGwc4OkXnG",
-          "name": "Google Sheets account"
-        }
-      }
     },
     {
       "parameters": {
@@ -2513,14 +2349,14 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        -5280,
-        768
+        -320,
+        2064
       ],
-      "id": "53e3938b-d4df-4ecb-b23a-35f72546da72",
+      "id": "3f944e7f-e25a-40eb-975a-431dead09669",
       "name": "Update row in sheet1",
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "HLccA4EGwc4OkXnG",
+          "id": "8C0A96vSy7hQpfve",
           "name": "Google Sheets account"
         }
       }
@@ -2631,14 +2467,14 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        -5184,
-        1392
+        -224,
+        2688
       ],
-      "id": "82a66f14-7cb1-4300-a365-600f8f82d785",
+      "id": "85788180-a684-4f2a-9f66-1b94bf11e659",
       "name": "Update row in sheet2",
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "HLccA4EGwc4OkXnG",
+          "id": "8C0A96vSy7hQpfve",
           "name": "Google Sheets account"
         }
       }
@@ -2749,14 +2585,14 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        -4960,
-        1552
+        0,
+        2848
       ],
-      "id": "262a0b2f-b3d4-4ee1-a608-b0ae4f769575",
+      "id": "613a91ce-1323-4ff3-9ae7-29f7b9a37b91",
       "name": "Update row in sheet3",
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "HLccA4EGwc4OkXnG",
+          "id": "8C0A96vSy7hQpfve",
           "name": "Google Sheets account"
         }
       }
@@ -2929,10 +2765,10 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.4,
       "position": [
-        -5904,
-        976
+        -944,
+        2272
       ],
-      "id": "18320865-c71c-4a07-bd5b-6117e98d6d6e",
+      "id": "11841cd7-fca8-4a06-9de0-6279df43d636",
       "name": "Switch",
       "alwaysOutputData": false
     },
@@ -3043,14 +2879,14 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        -4208,
-        -336
+        720,
+        960
       ],
-      "id": "7b61512a-9f01-472c-b198-25912e1aa536",
+      "id": "16aaf8d3-c406-4632-9ec9-30fc17475d3e",
       "name": "Actualizar paso",
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "HLccA4EGwc4OkXnG",
+          "id": "8C0A96vSy7hQpfve",
           "name": "Google Sheets account"
         }
       }
@@ -3068,7 +2904,7 @@
             {
               "id": "e3a4b6c2-313e-428a-8c32-537c7e3c5428",
               "leftValue": "={{ $('Obtener formato limpio').item.json.mensaje.toString() }}",
-              "rightValue": "^[1-4]$",
+              "rightValue": "^[1-5]$",
               "operator": {
                 "type": "string",
                 "operation": "regex"
@@ -3082,10 +2918,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -5632,
-        -352
+        -672,
+        944
       ],
-      "id": "f4da4be4-3358-4235-aa23-612007aede96",
+      "id": "d355a1c5-3b66-4648-ae4b-8b307d9ca0ee",
       "name": "If5",
       "alwaysOutputData": false
     },
@@ -3118,14 +2954,14 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        -5600,
-        32
+        -640,
+        1328
       ],
-      "id": "508e160d-6d7f-4b87-9e39-4416b52aeee5",
+      "id": "72f4873f-161c-4a4e-8bf2-4332f5ef91ab",
       "name": "Buscar por id1",
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "HLccA4EGwc4OkXnG",
+          "id": "8C0A96vSy7hQpfve",
           "name": "Google Sheets account"
         }
       }
@@ -3157,10 +2993,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -5664,
-        528
+        -656,
+        1824
       ],
-      "id": "e639aab4-d609-4a75-8f9f-2ca3ea6d949d",
+      "id": "72d2eab7-5b42-4af1-903c-6ad0bb04ccd0",
       "name": "If6"
     },
     {
@@ -3271,14 +3107,14 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        -5472,
-        544
+        -464,
+        1840
       ],
-      "id": "aa5afbed-7148-4cf4-ae82-232acf965ab1",
+      "id": "9512c91c-21bc-4ec6-9ffc-a806331b15c0",
       "name": "Update row in sheet4",
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "HLccA4EGwc4OkXnG",
+          "id": "8C0A96vSy7hQpfve",
           "name": "Google Sheets account"
         }
       }
@@ -3292,15 +3128,15 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        -3792,
-        -80
+        -1232,
+        336
       ],
-      "id": "ad903a5d-c0b3-4dbf-b120-15f0baf2909d",
+      "id": "6fecfe92-1701-4a22-b838-b0d7cff120a7",
       "name": "Menu",
       "webhookId": "c9bc75f9-c7cd-431d-877a-fd808a31c4f7",
       "credentials": {
         "telegramApi": {
-          "id": "VvDXs9CgpmkDMRM7",
+          "id": "jBaniyvIPGFH8Y1d",
           "name": "Telegram account"
         }
       }
@@ -3332,10 +3168,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -5696,
-        1072
+        -736,
+        2368
       ],
-      "id": "6666fb78-b3d0-4613-bf53-c6f46d345fc7",
+      "id": "f8299c5e-944e-40c7-ab86-c9f2cee1e46f",
       "name": "If1"
     },
     {
@@ -3367,15 +3203,15 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        -5408,
-        992
+        -448,
+        2288
       ],
-      "id": "0a1a2c10-4c5d-4bb2-93b4-43e3d60626e5",
+      "id": "1fe59ab5-4bb8-4fa8-a330-1506b3d5052e",
       "name": "Buscar id",
       "alwaysOutputData": true,
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "HLccA4EGwc4OkXnG",
+          "id": "8C0A96vSy7hQpfve",
           "name": "Google Sheets account"
         }
       }
@@ -3387,10 +3223,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -5024,
-        992
+        -64,
+        2288
       ],
-      "id": "1b2cb3bf-e56e-4620-b310-e1a8db728b53",
+      "id": "45048cee-73b6-4d0f-848c-62326565045f",
       "name": "Code in JavaScript4"
     },
     {
@@ -3414,14 +3250,14 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        -5216,
-        992
+        -256,
+        2288
       ],
-      "id": "a76189cb-d2ac-44a7-8bca-5187f29f6551",
+      "id": "39a4a680-c22e-4b98-9dd2-e65845f6a4e7",
       "name": "Tutorias",
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "HLccA4EGwc4OkXnG",
+          "id": "8C0A96vSy7hQpfve",
           "name": "Google Sheets account"
         }
       }
@@ -3542,14 +3378,14 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        -4848,
-        992
+        112,
+        2288
       ],
-      "id": "06a2ef0c-7890-470c-b716-1d55e87fa447",
+      "id": "6b443a4d-d108-48ba-b7d0-28affa180e80",
       "name": "Actualizar estado",
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "HLccA4EGwc4OkXnG",
+          "id": "8C0A96vSy7hQpfve",
           "name": "Google Sheets account"
         }
       }
@@ -3563,15 +3399,15 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        -4464,
-        992
+        496,
+        2288
       ],
-      "id": "034f0a53-3bb6-4daa-a1af-7e0fd65f509e",
+      "id": "966b383a-4423-4d1f-bab6-70c0e9ddeec8",
       "name": "Send a text message1",
       "webhookId": "4e2c9527-7ac3-4eed-b66d-de6ebae0881d",
       "credentials": {
         "telegramApi": {
-          "id": "VvDXs9CgpmkDMRM7",
+          "id": "jBaniyvIPGFH8Y1d",
           "name": "Telegram account"
         }
       }
@@ -3682,14 +3518,14 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        -4640,
-        992
+        320,
+        2288
       ],
-      "id": "56e5ebdf-3ecc-48f3-b7c9-5f01a791ad34",
+      "id": "0e7cbc1c-ad42-4c00-b724-a0e62875e212",
       "name": "Update row in sheet5",
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "HLccA4EGwc4OkXnG",
+          "id": "8C0A96vSy7hQpfve",
           "name": "Google Sheets account"
         }
       }
@@ -3800,14 +3636,14 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        -5488,
-        1168
+        -528,
+        2464
       ],
-      "id": "1bfceb20-07f3-4c39-8235-5de394cf7ddb",
+      "id": "604ae19d-157c-4cd5-8eac-52f4676f59d9",
       "name": "Update row in sheet6",
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "HLccA4EGwc4OkXnG",
+          "id": "8C0A96vSy7hQpfve",
           "name": "Google Sheets account"
         }
       }
@@ -3821,15 +3657,15 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        -5296,
-        1168
+        -336,
+        2464
       ],
-      "id": "2f41f321-c5d4-4df3-bf95-a7e9a9eb7c92",
+      "id": "1ebddea4-5703-4709-a89f-03c200b88410",
       "name": "Registro cancelado2",
       "webhookId": "9fa94b4b-6fa8-4397-8898-6752aafcea11",
       "credentials": {
         "telegramApi": {
-          "id": "VvDXs9CgpmkDMRM7",
+          "id": "jBaniyvIPGFH8Y1d",
           "name": "Telegram account"
         }
       }
@@ -3862,10 +3698,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -5712,
-        1600
+        -752,
+        2896
       ],
-      "id": "ca665f44-2b63-4ecf-b8ce-cac58660b609",
+      "id": "539ec058-31cd-41e3-983b-2550ed3f35b0",
       "name": "If7"
     },
     {
@@ -3974,14 +3810,14 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        -5488,
-        1696
+        -528,
+        2992
       ],
-      "id": "e70adcfd-92b3-471e-a6d3-337e9bd3a533",
+      "id": "ebc6607e-c0c2-46bf-ac8e-c8abe2416120",
       "name": "Update row in sheet7",
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "HLccA4EGwc4OkXnG",
+          "id": "8C0A96vSy7hQpfve",
           "name": "Google Sheets account"
         }
       }
@@ -3995,15 +3831,223 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        -5296,
-        1696
+        -336,
+        2992
       ],
-      "id": "2bf3403a-4ebb-4957-9ee9-e25fcd8b5c06",
+      "id": "6d4c1250-e9f1-45d1-a25c-8917aede3ce0",
       "name": "Envia confirmacion3",
       "webhookId": "cad53ad9-7b1b-46a0-b7e9-bd30517f2e1e",
       "credentials": {
         "telegramApi": {
-          "id": "VvDXs9CgpmkDMRM7",
+          "id": "jBaniyvIPGFH8Y1d",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1Sy-9QIGkl6i24EW5DOCMwk8nAhnUR-U9Gs-KZk5evyc",
+          "mode": "list",
+          "cachedResultName": "TUTORES",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Sy-9QIGkl6i24EW5DOCMwk8nAhnUR-U9Gs-KZk5evyc/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1830008109,
+          "mode": "list",
+          "cachedResultName": "TUTORIAS",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Sy-9QIGkl6i24EW5DOCMwk8nAhnUR-U9Gs-KZk5evyc/edit#gid=1830008109"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "estado",
+              "lookupValue": "Finalizada"
+            },
+            {
+              "lookupColumn": "id_estudiante",
+              "lookupValue": "={{ $('Obtener formato limpio').item.json.id_telegram }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -64,
+        704
+      ],
+      "id": "932155f9-58a7-45b2-a299-5dc4c0227ddf",
+      "name": "Get row(s) in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "8C0A96vSy7hQpfve",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const items = $input.all();\nlet chatId =$('Obtener formato limpio').first().json.id_telegram ;\n\nlet puntaje = [];\nlet indiceMateria = 1;\n\nfor (const item of items) {\n  const t = item.json;\n\n  puntaje.push({\n    puntaje: t.puntos || 0\n  });\n\n  indiceMateria++;\n}\n\n\nlet balance_actual = 0\npuntaje.forEach((suma) =>{\n  balance_actual += suma.puntaje\n})\n\n\n// Retornamos el formato unificado para n8n\nreturn [{\n  json: {\n    chat_id: chatId,\n    balance_actual: balance_actual,\n    total_items: items.length\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        96,
+        704
+      ],
+      "id": "1d9693f4-d9bc-4af6-83d6-22f3ae829b24",
+      "name": "Code in JavaScript7"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1Sy-9QIGkl6i24EW5DOCMwk8nAhnUR-U9Gs-KZk5evyc",
+          "mode": "list",
+          "cachedResultName": "TUTORES",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Sy-9QIGkl6i24EW5DOCMwk8nAhnUR-U9Gs-KZk5evyc/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1673536527,
+          "mode": "list",
+          "cachedResultName": "SESSIONS",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Sy-9QIGkl6i24EW5DOCMwk8nAhnUR-U9Gs-KZk5evyc/edit#gid=1673536527"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "telegram_id": "={{ $('Obtener formato limpio').item.json.id_telegram }}",
+            "ultima_actividad": "={{ $now.toFormat(\"dd-MM-yyyy\") }}",
+            "balance_actual": "={{ $json.balance_actual }}"
+          },
+          "matchingColumns": [
+            "telegram_id"
+          ],
+          "schema": [
+            {
+              "id": "telegram_id",
+              "displayName": "telegram_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "nombre_user",
+              "displayName": "nombre_user",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "pantalla_actual",
+              "displayName": "pantalla_actual",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "paso_actual",
+              "displayName": "paso_actual",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "datos_parciales",
+              "displayName": "datos_parciales",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "ultima_actividad",
+              "displayName": "ultima_actividad",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "balance_actual",
+              "displayName": "balance_actual",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        304,
+        704
+      ],
+      "id": "89773705-70cc-48e2-be9a-4e590d5f4594",
+      "name": "Update row in sheet8",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "8C0A96vSy7hQpfve",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Obtener formato limpio').item.json.id_telegram }}",
+        "text": "=Hola {{ $('Obtener formato limpio').item.json.nombre }}, actualmente tienes 🏆 {{ $('Code in JavaScript7').item.json.balance_actual }} puntos acumulados por tu constancia académica. ¡Sigue asistiendo a tus tutorías!",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        496,
+        704
+      ],
+      "id": "efa2dea0-f57b-4a03-b47d-0d21c4a0d008",
+      "name": "Send a text message5",
+      "webhookId": "17d84abe-52cd-4aa4-9eba-c95a363dc9d4",
+      "credentials": {
+        "telegramApi": {
+          "id": "jBaniyvIPGFH8Y1d",
           "name": "Telegram account"
         }
       }
@@ -4033,7 +4077,7 @@
         ],
         [
           {
-            "node": "If4",
+            "node": "Buscar por id5",
             "type": "main",
             "index": 0
           }
@@ -4088,6 +4132,13 @@
         [
           {
             "node": "Obtener datos2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Get row(s) in sheet",
             "type": "main",
             "index": 0
           }
@@ -4380,24 +4431,6 @@
         ]
       ]
     },
-    "If4": {
-      "main": [
-        [
-          {
-            "node": "Buscar por id5",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Update row in sheet",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Actualizar pantalla": {
       "main": [
         [
@@ -4448,17 +4481,6 @@
           {
             "node": "AI Agent",
             "type": "ai_memory",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Update row in sheet": {
-      "main": [
-        [
-          {
-            "node": "Send a text message3",
-            "type": "main",
             "index": 0
           }
         ]
@@ -4703,11 +4725,6 @@
         ]
       ]
     },
-    "Registro cancelado": {
-      "main": [
-        []
-      ]
-    },
     "If7": {
       "main": [
         [
@@ -4737,24 +4754,51 @@
         ]
       ]
     },
-    "Menu": {
+    "Get row(s) in sheet": {
       "main": [
-        []
+        [
+          {
+            "node": "Code in JavaScript7",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript7": {
+      "main": [
+        [
+          {
+            "node": "Update row in sheet8",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update row in sheet8": {
+      "main": [
+        [
+          {
+            "node": "Send a text message5",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     }
   },
   "active": false,
   "settings": {
     "executionOrder": "v1",
-    "binaryMode": "separate",
-    "availableInMCP": false
+    "binaryMode": "separate"
   },
-  "versionId": "ed0f5f73-8988-4ff1-a628-5fbe44013e12",
+  "versionId": "5834d67d-6bf2-4919-83f7-18280e319fd9",
   "meta": {
     "templateCredsSetupCompleted": true,
-    "instanceId": "0178bded5265cd150d4ce2c91966c4ad95e2c547f4f70024c1e9f235c33bbec4"
+    "instanceId": "8993b8efa6e29827070b3c119f80a65e11e697772d85bdd119c559a8f3a9aaa5"
   },
   "nodeGroups": [],
-  "id": "bFSNtofluOyb31PQ",
+  "id": "zfxY6luRPloK3qf1",
   "tags": []
 }
