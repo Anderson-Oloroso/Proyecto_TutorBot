@@ -8,12 +8,38 @@ Bot conversacional en **Telegram**, construido con **n8n**, que permite a estudi
 
 
 ---
+## Apartado: Examen Henrik Anderson Oloroso García
+
+### 1. Lógica implementada:
+En el nodo switch con las 4 opciones del menú, se le agreguó una rama extra al final, la cual es la opción de **Ver y actualizar mis tutorias**
+![alt text](image.png)
+![alt text](image-1.png)
+
+### 2. Prueba exitosa en telegram
+- Datos en telegram
+
+![alt text](image-2.png)
+
+- Datos en Google Sheets
+
+![alt text](image-3.png)
+
+![alt text](image-5.png)
+
+### 3. Nodos en el canvas n8n
+![alt text](image-4.png)
+
+### 4.
+- Modificaciones extras
+1. Agregue la columna de balance_actual en sessions, en la que se acumulan los puntos por curso finalizado
+2. Agregue la columna de puntos en tutorias, son los puntos parciales por materia a la cual se inscribió la persona. Únicamente filtrando todas las materias con el id del estudiante y que su estado sea finalizado.
+
+---
 
 ## Tabla de contenidos
 
 1. [¿Qué hace el bot?](#qué-hace-el-bot)
 2. [Cómo usar el bot (guía para el usuario final)](#cómo-usar-el-bot-guía-para-el-usuario-final)
-3. [Arquitectura técnica del flujo](#arquitectura-técnica-del-flujo)
 4. [Máquina de estados de la sesión](#máquina-de-estados-de-la-sesión)
 5. [Organización de los datos (Google Sheets)](#organización-de-los-datos-google-sheets)
 6. [Detalle de cada rama del flujo](#detalle-de-cada-rama-del-flujo)
@@ -61,46 +87,6 @@ El bot recuerda en qué paso de la conversación se encuentra cada usuario (grac
    - **Cancelar (3)**: el bot lista las tutorías en estado *Por iniciar* o *En progreso* → el usuario elige el número → botones **Confirmar / Cancelar** → al confirmar, el estado cambia a *Cancelada*.
    - **Finalizar (4)**: igual que cancelar, pero solo lista tutorías *En progreso* y, al confirmar, el estado cambia a *Finalizada*.
 5. En cualquier punto donde se piden botones inline, el usuario debe **presionar el botón** (no escribir texto) para confirmar o cancelar la acción.
-
----
-
-## Arquitectura técnica del flujo
-
-El workflow tiene **4 disparadores de tipo texto** (uno por cada opción del menú) y **3 disparadores de tipo `callback_query`** (para los botones Confirmar/Cancelar de cada rama), además del disparador inicial del menú:
-
-```mermaid
-flowchart TB
-    A["Telegram Trigger<br/>(mensaje entrante)"] --> B["Obtener formato limpio<br/>(normaliza id, nombre, mensaje, chat_id)"]
-    B --> C["Buscar por telegram_id<br/>(SESSIONS)"]
-    C --> D{"¿Ya existe<br/>sesión?"}
-    D -->|Sí| E["Actualizar sesión<br/>(última_actividad)"]
-    D -->|No| F["Actualizar sesión<br/>(crear registro)"]
-    E --> G["Menu<br/>(envía las 4 opciones)"]
-    F --> G
-    G --> H["Actualizar paso<br/>(pantalla_actual = Esperando_Opcion)"]
-
-    I["Opciones<br/>(Telegram Trigger: mensaje)"] --> J["Datos a json"]
-    J --> K["Buscar por id<br/>(SESSIONS)"]
-    K --> L{"4 opciones<br/>(Switch)"}
-    L -->|1| M["Rama REGISTRAR"]
-    L -->|2| N["Rama VER TUTORÍAS"]
-    L -->|3| O["Rama CANCELAR"]
-    L -->|4| P["Rama FINALIZAR"]
-```
-
-Cada una de las 4 ramas sigue el mismo **patrón de 2 pasos**:
-
-```mermaid
-flowchart LR
-    S1["Paso 1: listar opciones<br/>(Google Sheets + Code JS)"] -->|"guarda opciones en<br/>datos_parciales (SESSIONS)"| S2["Paso 2: el usuario elige un número"]
-    S2 --> S3["Nuevo Telegram Trigger<br/>(mensaje / callback_query)"]
-    S3 --> S4["Code JS: valida selección<br/>contra datos_parciales"]
-    S4 --> S5["Envía resumen +<br/>botones Confirmar/Cancelar"]
-    S5 --> S6["Telegram Trigger<br/>(callback_query)"]
-    S6 --> S7{"If: data == 'confirmar'"}
-    S7 -->|Sí| S8["Actualiza/crea fila<br/>en Google Sheets"]
-    S7 -->|No| S9["Mensaje: acción cancelada"]
-```
 
 ---
 
@@ -235,6 +221,7 @@ Nodos clave: `Cancelar tutoria` → `Obtener datos1` → `Parsear datos1` (filtr
 
 ### 🔴 Rama 4 — Finalizar tutoría
 Nodos clave: `Finalizar tutoria` → `Obtener datos2` → `Parsear datos2` (filtra solo `En progreso`) → `Tutorias que se pueden finalizar` → usuario elige número → `Buscar por id4` → `Code in JavaScript5` (valida elección) → `Envia confirmacion2` (botones) → `Confirmar2` (callback) → `If3` → si confirma: `Code in JavaScript6` + `Actualizar estado1` (cambia `estado` a `Finalizada`) → `Send a text message2`; si cancela: `Registro cancelado2`.
+
 
 ---
 
