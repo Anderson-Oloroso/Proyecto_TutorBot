@@ -93,6 +93,7 @@
 La persistencia del flujo conversacional se gestiona en la hoja SESSIONS, previniendo la pérdida de contexto en interacciones de múltiples pasos:
 
 stateDiagram-v2
+
     [*] --> MENU_PRINCIPAL
     MENU_PRINCIPAL --> Esperando_Opcion: Menú enviado
     
