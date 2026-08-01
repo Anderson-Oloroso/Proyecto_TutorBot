@@ -77,6 +77,8 @@
 
 - Finalizar (4): Lista únicamente tutorías En progreso. Al confirmar, el estado cambia a Finalizada y se transfieren los puntos acumulados al balance del estudiante.
 
+- Ver y actualizar mis puntos (5): Actualiza los datos en google sheets y los muestra, siempre y cuando estas materias estén marcadas como finalizadas y se acumula en `SESSIONS`
+
 ## 🔄 Máquina de Estados (Wizard de Conversación)
 
 La persistencia del flujo conversacional se gestiona en la hoja SESSIONS, previniendo la pérdida de contexto en interacciones de múltiples pasos:
