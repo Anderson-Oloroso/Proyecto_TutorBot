@@ -92,26 +92,27 @@
 
 La persistencia del flujo conversacional se gestiona en la hoja SESSIONS, previniendo la pérdida de contexto en interacciones de múltiples pasos:
 
+```mermaid
 stateDiagram-v2
-
     [*] --> MENU_PRINCIPAL
-    MENU_PRINCIPAL --> Esperando_Opcion: Menú enviado
+    MENU_PRINCIPAL --> Esperando_Opcion : Menú enviado
     
-    Esperando_Opcion --> SELECCION_MATERIA: Opción 1 (Registrar)
-    Esperando_Opcion --> VER_ACTUALIZAR_TUTORIAS: Opción 2 (Ver/Actualizar)
-    Esperando_Opcion --> SELECCION_CANCELAR: Opción 3 (Cancelar)
-    Esperando_Opcion --> SELECCION_FINALIZAR: Opción 4 (Finalizar)
+    Esperando_Opcion --> SELECCION_MATERIA : Opción 1 (Registrar)
+    Esperando_Opcion --> VER_ACTUALIZAR_TUTORIAS : Opción 2 (Ver/Actualizar)
+    Esperando_Opcion --> SELECCION_CANCELAR : Opción 3 (Cancelar)
+    Esperando_Opcion --> SELECCION_FINALIZAR : Opción 4 (Finalizar)
     
-    SELECCION_MATERIA --> CONFIRMACION_FINAL: Selecciona materia/horario
-    CONFIRMACION_FINAL --> [*]: Confirmar / Cancelar
+    SELECCION_MATERIA --> CONFIRMACION_FINAL : Selecciona materia/horario
+    CONFIRMACION_FINAL --> [*] : Confirmar / Cancelar
     
-    VER_ACTUALIZAR_TUTORIAS --> [*]: Consulta realizada / Estado actualizado
+    VER_ACTUALIZAR_TUTORIAS --> [*] : Consulta realizada / Estado actualizado
     
-    SELECCION_CANCELAR --> CONFIRMACION_CANCELAR: Selecciona tutoría
-    CONFIRMACION_CANCELAR --> [*]: Confirmar / Cancelar
+    SELECCION_CANCELAR --> CONFIRMACION_CANCELAR : Selecciona tutoría
+    CONFIRMACION_CANCELAR --> [*] : Confirmar / Cancelar
     
-    SELECCION_FINALIZAR --> CONFIRMACION_FINALIZAR: Selecciona tutoría
-    CONFIRMACION_FINALIZAR --> [*]: Confirmar / Cancelar (Acredita Puntos)
+    SELECCION_FINALIZAR --> CONFIRMACION_FINALIZAR : Selecciona tutoría
+    CONFIRMACION_FINALIZAR --> [*] : Confirmar / Cancelar (Acredita Puntos)
+```
 
 ## 🗄️ Arquitectura del Modelo de Datos (Google Sheets)
 El almacenamiento relacional está implementado en la hoja TUTORES (ID: 1Sy-9QIGkl6i24EW5DOCMwk8nAhnUR-U9Gs-KZk5evyc), estructurada con las siguientes 4 pestañas:
