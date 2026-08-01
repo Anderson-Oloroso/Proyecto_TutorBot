@@ -119,12 +119,11 @@ El almacenamiento relacional está implementado en la hoja TUTORES (ID: 1Sy-9QIG
 
 Diagrama Entidad-Relación (ER)
 
-
+```mermaid
 erDiagram
-
     TUTORES ||--o{ DISPONIBILIDAD : "ofrece"
     TUTORES ||--o{ TUTORIAS : "dicta"
-    SESSIONS ||--o{ TUTORIAS : "registra (telegram_id = id_estudiante)"
+    SESSIONS ||--o{ TUTORIAS : "registra"
 
     TUTORES {
         string id_tutor PK
@@ -159,6 +158,7 @@ erDiagram
         datetime ultima_actividad
         number balance_actual
     }
+```
 
 *⚠️ Nota de implementación: La columna datos_parciales almacena las opciones formateadas en JSON para ser leídas con JSON.parse() en la siguiente interacción del usuario.*
 
