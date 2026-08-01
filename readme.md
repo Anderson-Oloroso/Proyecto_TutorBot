@@ -1,128 +1,128 @@
-# TutorBot 2 — Bot de Tutorías en Telegram (n8n)
+# TutorBot — Bot de Tutorías Académicas en Telegram (n8n)
 
-Bot conversacional en **Telegram**, construido con **n8n**, que permite a estudiantes registrarse, consultar, cancelar y finalizar tutorías académicas. Toda la información (tutores, disponibilidad, tutorías y sesiones de conversación) se almacena en una **Google Sheet** que actúa como base de datos.
-
-🤖 **Bot en Telegram:** [@Lucia_M_458bot](https://t.me/Lucia_M_458bot)
-🤖 **token bot** 8354497610:AAGVbeJsPMneGSH-h65FRhPjIX4oyIC5T46| 
-📊 **Enlace Google Sheets:**[Tutores](https://docs.google.com/spreadsheets/d/1Sy-9QIGkl6i24EW5DOCMwk8nAhnUR-U9Gs-KZk5evyc/edit?usp=sharing)
-
-
----
-## Apartado: Examen Henrik Anderson Oloroso García
-
-### 1. Lógica implementada:
-En el nodo switch con las 4 opciones del menú, se le agreguó una rama extra al final, la cual es la opción de **Ver y actualizar mis tutorias**
-![alt text](image.png)
-![alt text](image-1.png)
-
-### 2. Prueba exitosa en telegram
-- Datos en telegram
-
-![alt text](image-2.png)
-
-- Datos en Google Sheets
-
-![alt text](image-3.png)
-
-![alt text](image-5.png)
-
-### 3. Nodos en el canvas n8n
-![alt text](image-4.png)
-
-### 4.
-- Modificaciones extras
-1. Agregue la columna de balance_actual en sessions, en la que se acumulan los puntos por curso finalizado
-2. Agregue la columna de puntos en tutorias, son los puntos parciales por materia a la cual se inscribió la persona. Únicamente filtrando todas las materias con el id del estudiante y que su estado sea finalizado.
+> **TutorBot** es una solución automatizada de gestión de tutorías académicas orquestada mediante **n8n**. Conecta a estudiantes y tutores mediante un motor de asignación inteligente, gestionando desde la solicitud inicial hasta la finalización de la asesoría. Elimina cruces de agenda, brinda trazabilidad del proceso y centraliza la disponibilidad en tiempo real.
 
 ---
 
-## Tabla de contenidos
+## 🔗 Recursos del Proyecto
 
-1. [¿Qué hace el bot?](#qué-hace-el-bot)
-2. [Cómo usar el bot (guía para el usuario final)](#cómo-usar-el-bot-guía-para-el-usuario-final)
-4. [Máquina de estados de la sesión](#máquina-de-estados-de-la-sesión)
-5. [Organización de los datos (Google Sheets)](#organización-de-los-datos-google-sheets)
-6. [Detalle de cada rama del flujo](#detalle-de-cada-rama-del-flujo)
-7. [Instalación y configuración](#instalación-y-configuración)
-8. [Estructura de nodos en n8n](#estructura-de-nodos-en-n8n)
-9. [Limitaciones y mejoras futuras](#limitaciones-y-mejoras-futuras)
+* **🤖 Bot de Telegram:** [@Lucia_M_458bot](https://t.me/Lucia_M_458bot)
+* **📊 Base de Datos (Google Sheets):** [TutorBot_DB](https://docs.google.com/spreadsheets/d/1Sy-9QIGkl6i24EW5DOCMwk8nAhnUR-U9Gs-KZk5evyc/edit?usp=sharing)
+* **🔑 Token del Bot:** `8354497610:AAGVbeJsPMneGSH-h65FRhPjIX4oyIC5T46`
 
 ---
 
-## ¿Qué hace el bot?
+## 🎯 Objetivos del Sistema
 
-Desde Telegram, un estudiante puede:
-
-| Opción | Acción |
-|---|---|
-| 1️⃣ | **Registrarse** a una tutoría (elige tutor/materia/horario disponible) |
-| 2️⃣ | **Ver sus tutorías** registradas |
-| 3️⃣ | **Cancelar** una tutoría (en estado "Por iniciar" o "En progreso") |
-| 4️⃣ | **Finalizar** una tutoría que está en progreso |
-
-El bot recuerda en qué paso de la conversación se encuentra cada usuario (gracias a la hoja `SESSIONS`), por lo que puede tener múltiples conversaciones simultáneas con distintos estudiantes sin perder el hilo.
+1. **Gestión Automatizada:** Integrar Telegram, Google Sheets y lógica avanzada de workflows en n8n.
+2. **Motor de Búsqueda e Imparcialidad:** Asociar automáticamente materia, tutor y horario libre sin duplicidad de reservas.
+3. **Autogestión Conversacional:** Permitir al estudiante solicitar, consultar, actualizar, cancelar y finalizar tutorías en formato guiado (Wizard).
+4. **Control de Ciclo de Vida:** Controlar de forma precisa los estados (`Por iniciar` $\rightarrow$ `En progreso` $\rightarrow$ `Finalizada` / `Cancelada`).
+5. **Gamificación y Reportes:** Acumular puntos/balance académico por tutorías completadas exitosamente.
 
 ---
 
-## Cómo usar el bot (guía para el usuario final)
+## 📋 Tabla de Contenidos
 
-1. **Iniciar conversación**: el estudiante abre [@Lucia_M_458bot](https://t.me/Lucia_M_458bot) en Telegram y escribe cualquier mensaje.
-2. El bot responde con el **menú principal**:
-
-   ```
-   Hola {nombre}
-
-   Bienvenido al sistema de tutorías.
-
-   ¿Qué deseas hacer?
-   1. Registrarme a una tutoría
-   2. Ver mis tutorías
-   3. Cancelar una tutoría
-   4. Finalizar una tutoría
-   ```
-3. El usuario responde **solo con el número** (1, 2, 3 o 4).
-4. Según la opción, el bot continúa el diálogo:
-   - **Registrar (1)**: muestra la lista numerada de tutores/materias/horarios disponibles → el usuario elige un número → el bot muestra un resumen con botones **Confirmar / Cancelar** → al confirmar, se crea la tutoría.
-   - **Ver mis tutorías (2)**: el bot lista todas las tutorías asociadas a ese `telegram_id`.
-   - **Cancelar (3)**: el bot lista las tutorías en estado *Por iniciar* o *En progreso* → el usuario elige el número → botones **Confirmar / Cancelar** → al confirmar, el estado cambia a *Cancelada*.
-   - **Finalizar (4)**: igual que cancelar, pero solo lista tutorías *En progreso* y, al confirmar, el estado cambia a *Finalizada*.
-5. En cualquier punto donde se piden botones inline, el usuario debe **presionar el botón** (no escribir texto) para confirmar o cancelar la acción.
+- [TutorBot — Bot de Tutorías Académicas en Telegram (n8n)](#tutorbot--bot-de-tutorías-académicas-en-telegram-n8n)
+  - [🔗 Recursos del Proyecto](#-recursos-del-proyecto)
+  - [🎯 Objetivos del Sistema](#-objetivos-del-sistema)
+  - [📋 Tabla de Contenidos](#-tabla-de-contenidos)
+  - [💻 Funcionalidades Principales](#-funcionalidades-principales)
+  - [📱 Guía de Uso del Usuario Final](#-guía-de-uso-del-usuario-final)
+  - [🔄 Máquina de Estados (Wizard de Conversación)](#-máquina-de-estados-wizard-de-conversación)
+  - [🗄️ Arquitectura del Modelo de Datos (Google Sheets)](#️-arquitectura-del-modelo-de-datos-google-sheets)
+  - [🔀 Detalle de Ramas de Flujo en n8n](#-detalle-de-ramas-de-flujo-en-n8n)
+  - [🚀 Instalación y Configuración](#-instalación-y-configuración)
+  - [⚠️ Limitaciones y Mejoras Futuras](#-limitaciones-y-mejoras-futuras)
 
 ---
 
-## Máquina de estados de la sesión
+## 👤 Implementaciones y Pruebas (Evaluación Examen)
 
-Cada usuario tiene una fila en la hoja `SESSIONS` que funciona como su "memoria" de conversación:
+**Desarrollado por:** Henrik Anderson Oloroso García
 
-```mermaid
+### 1. Modificaciones a la Lógica de Negocio
+* **Nueva Opción del Menú:** En el nodo `Switch` principal de enrutamiento, se integró una rama adicional para la opción **Ver y actualizar mis tutorías**, permitiendo consultar el estado actual y gestionar las asesorías agendadas.
+* **Sistema de Puntos y Balance Académico:**
+  * **Hoja `SESSIONS`:** Se incorporó la columna `balance_actual`, encargada de acumular el total de puntos obtenidos por el alumno al finalizar sus asesorías.
+  * **Hoja `TUTORIAS`:** Se añadió la columna `puntos`, que almacena la puntuación asignada por materia a la cual se inscribió el estudiante. Al cambiar el estado a `Finalizada`, los puntos de dicha tutoría se acreditan al `balance_actual` del usuario en la sesión.
+* **Integración de IA (Agente Inteligente):** Se integró un nodo `AI Agent` impulsado por **Google Gemini Chat Model** y soportado por `Simple Memory`, permitiendo responder consultas complejas o guiar al usuario fuera de la secuencia estática cuando la condición general se cumple.
+---
+
+## 💻 Funcionalidades Principales
+
+| Opción | Comando / Menú | Acción Ejecutada |
+| :---: | :--- | :--- |
+| **1️⃣** | **Registrar tutoría** | Despliega catálogo de tutores y materias filtrando por disponibilidad `Libre`. |
+| **2️⃣** | **Ver/Actualizar tutorías** | Consulta las tutorías asociadas al estudiante y permite gestionar actualizaciones. |
+| **3️⃣** | **Cancelar tutoría** | Permite dar de baja tutorías en estado `Por iniciar` o `En progreso`. |
+| **4️⃣** | **Finalizar tutoría** | Marca la clase como `Finalizada`, liberando al tutor e incrementando el `balance_actual` de puntos del estudiante. |
+
+---
+
+## 📱 Guía de Uso del Usuario Final
+
+1. **Inicio de sesión:** Abre [@Lucia_M_458bot](https://t.me/Lucia_M_458bot) en Telegram y envía cualquier mensaje.
+2. **Navegación en Menú Principal:**
+   ```text
+   🤖 Asistente IA: 
+    ¡Hola! Soy tu asistente de tutorías personal. Estoy aquí para ayudarte a organizar tus sesiones de estudio y resolver tus dudas. ✨
+
+    ¿En qué puedo asistirte hoy? Aquí tienes las opciones disponibles:
+    1) Registrar una tutoría 📚
+    2) Ver tus tutorías 📝
+    3) Cancelar una tutoria 🚫
+    4) Finalizar sesión ✨
+    5) Ver y actualizar mis puntos 🎓
+
+    Para elegir, ingresa únicamente números.
+
+**Flujo Guiado (Wizard):**
+
+- Registrar (1): El bot presenta la lista de horarios y materias disponibles. Selecciona el número correspondiente y confirma usando los botones inline Confirmar / Cancelar.
+
+- Ver/Actualizar (2): Lista las tutorías del usuario mostrando su estado actual y detalle de puntos.
+
+- Cancelar (3): Muestra tutorías activas (Por iniciar / En progreso). Elige la que deseas cancelar y confirma la acción.
+
+- Finalizar (4): Lista únicamente tutorías En progreso. Al confirmar, el estado cambia a Finalizada y se transfieren los puntos acumulados al balance del estudiante.
+
+## 🔄 Máquina de Estados (Wizard de Conversación)
+
+La persistencia del flujo conversacional se gestiona en la hoja SESSIONS, previniendo la pérdida de contexto en interacciones de múltiples pasos:
+
 stateDiagram-v2
     [*] --> MENU_PRINCIPAL
-    MENU_PRINCIPAL --> Esperando_Opcion: Menu enviado
-    Esperando_Opcion --> SELECCION_MATERIA: opción 1 (Registrar)
-    Esperando_Opcion --> VER_TUTORIAS: opción 2
-    Esperando_Opcion --> SELECCION_CANCELAR: opción 3
-    Esperando_Opcion --> SELECCION_FINALIZAR: opción 4
-    SELECCION_MATERIA --> CONFIRMACION_FINAL: elige tutor/horario
+    MENU_PRINCIPAL --> Esperando_Opcion: Menú enviado
+    
+    Esperando_Opcion --> SELECCION_MATERIA: Opción 1 (Registrar)
+    Esperando_Opcion --> VER_ACTUALIZAR_TUTORIAS: Opción 2 (Ver/Actualizar)
+    Esperando_Opcion --> SELECCION_CANCELAR: Opción 3 (Cancelar)
+    Esperando_Opcion --> SELECCION_FINALIZAR: Opción 4 (Finalizar)
+    
+    SELECCION_MATERIA --> CONFIRMACION_FINAL: Selecciona materia/horario
     CONFIRMACION_FINAL --> [*]: Confirmar / Cancelar
-    SELECCION_CANCELAR --> CONFIRMACION_CANCELAR: elige tutoría
+    
+    VER_ACTUALIZAR_TUTORIAS --> [*]: Consulta realizada / Estado actualizado
+    
+    SELECCION_CANCELAR --> CONFIRMACION_CANCELAR: Selecciona tutoría
     CONFIRMACION_CANCELAR --> [*]: Confirmar / Cancelar
-    SELECCION_FINALIZAR --> CONFIRMACION_FINALIZAR: elige tutoría
-    CONFIRMACION_FINALIZAR --> [*]: Confirmar / Cancelar
-```
+    
+    SELECCION_FINALIZAR --> CONFIRMACION_FINALIZAR: Selecciona tutoría
+    CONFIRMACION_FINALIZAR --> [*]: Confirmar / Cancelar (Acredita Puntos)
 
-> Los valores exactos de `pantalla_actual` / `paso_actual` se guardan como texto libre en la hoja `SESSIONS` (por ejemplo `Esperando_Opcion`, `RESERVA_FECHA`, `CONFIRMACION_FINAL`) y los interpreta cada rama del flujo.
+## 🗄️ Arquitectura del Modelo de Datos (Google Sheets)
+El almacenamiento relacional está implementado en la hoja TUTORES (ID: 1Sy-9QIGkl6i24EW5DOCMwk8nAhnUR-U9Gs-KZk5evyc), estructurada con las siguientes 4 pestañas:
 
----
+Diagrama Entidad-Relación (ER)
 
-## Organización de los datos (Google Sheets)
 
-Toda la información vive en **un único archivo de Google Sheets** (referenciado en n8n como documento `TUTORES`, ID `1Sy-9QIGkl6i24EW5DOCMwk8nAhnUR-U9Gs-KZk5evyc`), con **4 pestañas**:
-
-```mermaid
 erDiagram
-    TUTORES ||--o{ DISPONIBILIDAD : "tiene horarios"
-    TUTORES ||--o{ TUTORIAS : "imparte"
-    SESSIONS ||--o{ TUTORIAS : "telegram_id = id_estudiante"
+
+    TUTORES ||--o{ DISPONIBILIDAD : "ofrece"
+    TUTORES ||--o{ TUTORIAS : "dicta"
+    SESSIONS ||--o{ TUTORIAS : "registra (telegram_id = id_estudiante)"
 
     TUTORES {
         string id_tutor PK
@@ -146,6 +146,7 @@ erDiagram
         date fecha
         time hora
         string estado
+        number puntos
     }
     SESSIONS {
         number telegram_id PK
@@ -154,117 +155,35 @@ erDiagram
         string paso_actual
         string datos_parciales
         datetime ultima_actividad
+        number balance_actual
     }
-```
 
-### 1. Hoja `TUTORES`
-Catálogo de tutores disponibles.
+*⚠️ Nota de implementación: La columna datos_parciales almacena las opciones formateadas en JSON para ser leídas con JSON.parse() en la siguiente interacción del usuario.*
 
-| Columna | Tipo | Descripción |
-|---|---|---|
-| `id_tutor` | texto (PK) | Identificador único del tutor, ej. `TUT001` |
-| `nombre` | texto | Nombre completo del tutor |
-| `especialidad_materias` | texto | Materia(s) que imparte |
-| `estado` | texto | `Activo` / `Inactivo` |
+## 🔀 Detalle de Ramas de Flujo en n8n
 
-### 2. Hoja `DISPONIBILIDAD`
-Horarios que cada tutor tiene abiertos.
+- **🟢 Rama 1** — Registrar tutoría:registrar (trigger) $\rightarrow$ Select Tutores + Select Materias $\rightarrow$ Code in JavaScript (cruza tutores con disponibilidad libre) $\rightarrow$ Actualizar datos_parciales $\rightarrow$ Selección del usuario $\rightarrow$ Buscar por id1 $\rightarrow$ Envia confirmacion (botones inline) $\rightarrow$ Confirmar (callback) $\rightarrow$ Code (calcula id_tutoria consecutivo) $\rightarrow$ Adjuntar fila a tutorias $\rightarrow$ Mensaje "✅ Tutoría registrada exitosamente".
 
-| Columna | Tipo | Descripción |
-|---|---|---|
-| `id_dispo` | texto (PK) | Identificador del bloque de horario, ej. `DISP001` |
-| `id_tutor` | texto (FK → TUTORES) | Tutor al que pertenece el horario |
-| `dia_semana` | texto | Lunes, Martes, ... |
-| `hora_inicio` | hora | Hora de inicio del bloque |
-| `hora_fin` | hora | Hora de fin del bloque |
-| `estado` | texto | `Libre` / `Ocupado` — solo los `Libre` se ofrecen al registrar una tutoría |
+- **🔵 Rama 2** — Ver y actualizar mis tutorías:Mis tutorias $\rightarrow$ Obtener datos (lee TUTORIAS por id_estudiante) $\rightarrow$ Parsear datos (formatea resumen con emojis y puntos) $\rightarrow$ Actualizar datos_parciales1 $\rightarrow$ Tutorias registradas (envío del listado).
 
-### 3. Hoja `TUTORIAS`
-Registro histórico y activo de tutorías agendadas.
+- **🟠 Rama 3** — Cancelar tutoría:Cancelar tutoria $\rightarrow$ Obtener datos1 (filtra Por iniciar / En progreso) $\rightarrow$ Parsear datos1 $\rightarrow$ Tutorias que se pueden cancelar $\rightarrow$ Selección del usuario $\rightarrow$ Buscar por id3 $\rightarrow$ Code in JavaScript3 $\rightarrow$ Envia confirmacion1 $\rightarrow$ Update row in sheet1 (cambia estado a Cancelada).
 
-| Columna | Tipo | Descripción |
-|---|---|---|
-| `id_tutoria` | texto (PK) | Identificador consecutivo, ej. `TUTOR001` (se calcula tomando el máximo id existente + 1) |
-| `id_estudiante` | número | `telegram_id` del alumno que agendó |
-| `id_tutor` | texto (FK → TUTORES) | Tutor asignado |
-| `materia` | texto | Materia de la tutoría |
-| `fecha` | fecha | Fecha agendada |
-| `hora` | hora | Hora agendada |
-| `estado` | texto | `Por iniciar` → `En progreso` → `Finalizada`, o `Cancelada` |
+- **🔴 Rama 4** — Finalizar tutoría:Finalizar tutoria $\rightarrow$ Obtener datos2 (filtra En progreso) $\rightarrow$ Parsear datos2 $\rightarrow$ Tutorias que se pueden finalizar $\rightarrow$ Selección del usuario $\rightarrow$ Buscar por id4 $\rightarrow$ Code in JavaScript5 $\rightarrow$ Update row in sheet2 (cambia estado a Finalizada) $\rightarrow$ Suma de puntos al balance_actual del usuario.
 
-### 4. Hoja `SESSIONS`
-Estado de la conversación de cada usuario de Telegram (funciona como "memoria" temporal del bot).
+- **🤖 Rama Especial** — Agente de Inteligencia Artificial:Ante entradas no estructuradas o desviaciones de la máquina de estados, el flujo deriva el mensaje hacia un nodo AI Agent integrado con el modelo Google Gemini Chat Model y Simple Memory, ofreciendo soporte conversacional contextualizado antes de redirigir al menú.
 
-| Columna | Tipo | Descripción |
-|---|---|---|
-| `telegram_id` | número (PK) | ID de Telegram del usuario (`message.from.id`) |
-| `nombre_user` | texto | Nombre del usuario tal como lo reporta Telegram |
-| `pantalla_actual` | texto | Pantalla/menú en la que se encuentra el usuario |
-| `paso_actual` | texto/número | Paso puntual dentro de esa pantalla |
-| `datos_parciales` | texto (JSON) | Objeto JSON con las opciones mostradas y/o los datos que el usuario ha ido seleccionando (ej. `{"id_tutor":"TUT002","materia":"Química"}` o `{"accion":"finalizar_tutoria","opciones":[...]}`) |
-| `ultima_actividad` | fecha/hora | Marca de tiempo de la última interacción |
+## 🚀 Instalación y Configuración
 
-> ⚠️ La columna `datos_parciales` es el "pegamento" del flujo: cada rama escribe ahí las opciones numeradas que le mostró al usuario, y en el siguiente mensaje se relee y se parsea con `JSON.parse()` para saber qué eligió.
+1. **Importación del Workflow:** Carga el archivo `TutorBot.json` en n8n desde **Workflows → Import from File**.
 
----
+2. **Configuración de Google Sheets:**
+   - Conecta tu credencial de OAuth2 para Google Sheets.
+   - Apunta a la hoja de cálculo: [TutorBot_DB](https://docs.google.com/spreadsheets/d/1Sy-9QIGkl6i24EW5DOCMwk8nAhnUR-U9Gs-KZk5evyc/edit?usp=sharing)
 
-## Detalle de cada rama del flujo
+3. **Configuración del Bot de Telegram:**
+   - Asigna las credenciales utilizando el token de **@BotFather: `8354497610:AAGVbeJsPMneGSH-h65FRhPjIX4oyIC5T46`** en todos los nodos de tipo **Telegram Trigger** y **Telegram**.
 
-### 🟢 Rama 1 — Registrar tutoría
-Nodos clave: `registrar` (trigger) → `Select Tutores` + `Select Materias` → `Code in JavaScript` (cruza tutores con disponibilidad `Libre` y arma la lista numerada) → `Actualizar datos_parciales` → usuario responde número → `Buscar por id1` → `Code in JavaScript1` (valida la opción elegida) → `Envia confirmacion` (botones Confirmar/Cancelar) → `Confirmar` (callback) → `If1` → si confirma: `Code in JavaScript2` (genera `id_tutoria` consecutivo) → `Adjuntar fila a tutorias` (crea la fila en `TUTORIAS`) → `Send a text message` ("✅ Tutoría registrada exitosamente"); si cancela: `Registro cancelado`.
+4. **Verificación del Modelo de Datos:** Revisa que los nombres de las 4 pestañas y sus encabezados coincidan exactamente con la sección **Modelo de Datos**.
 
-### 🔵 Rama 2 — Ver mis tutorías
-Nodos clave: `Mis tutorias` → `Obtener datos` (lee `TUTORIAS` filtrando por `id_estudiante`) → `Parsear datos` (arma el mensaje con emojis, una línea por tutoría) → `Tutorias registradas` (envía el listado).
+5. **Activación:** Activa el flujo (**Active / ON**) para permitir la escucha continua de mensajes ejecutando el workflow, o bien publicandolo (**Publish**)
 
-### 🟠 Rama 3 — Cancelar tutoría
-Nodos clave: `Cancelar tutoria` → `Obtener datos1` → `Parsear datos1` (filtra solo estados `Por iniciar` / `En progreso` y elimina duplicados) → `Tutorias que se pueden cancelar` → usuario elige número → `Buscar por id3` → `Code in JavaScript3` (valida elección) → `Envia confirmacion1` (botones) → `Confirmar1` (callback) → `If2` → si confirma: `Code in JavaScript4` + `Actualizar estado` (cambia `estado` a `Cancelada` en `TUTORIAS`) → `Send a text message1`; si cancela: `Registro cancelado1`.
-
-### 🔴 Rama 4 — Finalizar tutoría
-Nodos clave: `Finalizar tutoria` → `Obtener datos2` → `Parsear datos2` (filtra solo `En progreso`) → `Tutorias que se pueden finalizar` → usuario elige número → `Buscar por id4` → `Code in JavaScript5` (valida elección) → `Envia confirmacion2` (botones) → `Confirmar2` (callback) → `If3` → si confirma: `Code in JavaScript6` + `Actualizar estado1` (cambia `estado` a `Finalizada`) → `Send a text message2`; si cancela: `Registro cancelado2`.
-
-
----
-
-## Instalación y configuración
-
-### Requisitos previos
-- Una instancia de **n8n** (cloud o self-hosted).
-- Un **bot de Telegram** creado con [@BotFather](https://t.me/BotFather) y su token.
-- Una **Google Sheet** con las 4 pestañas descritas arriba (puedes usar `TUTORES.xlsx` como plantilla base y subirla a Google Drive).
-- Credenciales de **Google Sheets OAuth2** configuradas en n8n.
-- Credenciales del **Bot de Telegram** configuradas en n8n.
-
-### Pasos
-1. Importa el archivo `TutorBot_2.json` en n8n (`Workflows → Import from File`).
-2. En cada nodo de tipo **Google Sheets**, selecciona tu propia credencial y vuelve a apuntar el `documentId` hacia tu copia de la hoja de cálculo (actualmente apunta al documento `TUTORES` con ID `1Sy-9QIGkl6i24EW5DOCMwk8nAhnUR-U9Gs-KZk5evyc`).
-3. En cada nodo de tipo **Telegram Trigger** y **Telegram** (envío de mensajes), selecciona tu credencial del bot.
-4. Verifica que las 4 pestañas de tu Google Sheet tengan exactamente los encabezados descritos en la sección [Organización de los datos](#organización-de-los-datos-google-sheets) (los nombres de columna se usan como referencia directa en los nodos).
-5. Activa el workflow (`Active`) o pruébalo con **Execute workflow → from Telegram Trigger**.
-6. Escríbele a tu bot desde Telegram para iniciar la conversación.
-
----
-
-## Estructura de nodos en n8n
-
-El workflow completo cuenta con **81 nodos**, agrupados así:
-
-| Tipo de nodo | Cantidad aprox. | Uso |
-|---|---|---|
-| `telegramTrigger` | 8 | Un trigger de mensaje/callback por cada punto de entrada del usuario (menú, cada rama y cada confirmación) |
-| `telegram` | 12 | Envío de mensajes y menús con botones inline |
-| `googleSheets` | 33 | Lectura/escritura sobre las 4 pestañas de la hoja de cálculo |
-| `code` (JavaScript) | 9 | Lógica de parseo, formateo de mensajes y validación de selecciones |
-| `set` | 9 | Normalización de los datos entrantes de Telegram a un JSON limpio |
-| `if` / `switch` | 6 | Enrutamiento según sesión existente, opción del menú o confirmación del usuario |
-
-Puedes ver la captura completa del canvas al inicio de este documento (`flujo_completo.png`).
-
----
-
-## Limitaciones y mejoras futuras
-
-- No hay manejo de **concurrencia**: si dos usuarios agendan el mismo horario casi simultáneamente, no hay bloqueo pessimista sobre `DISPONIBILIDAD`.
-- El campo `datos_parciales` almacena JSON como texto plano; un error de formato (comillas, tildes) puede romper el `JSON.parse()` en el siguiente paso.
-- No hay comando de **cancelación global** (ej. `/cancelar`) para salir de un flujo a medio camino y volver al menú.
-- No hay recordatorios automáticos (ej. avisar 1 hora antes de la tutoría).
-- Los `id_tutoria` se calculan buscando el máximo existente + 1 en cada ejecución, lo cual no escala bien con mucho volumen concurrente; se recomienda migrar a un generador de IDs atómico si el uso crece.
