@@ -38,18 +38,6 @@
 
 ---
 
-## 👤 Implementaciones y Pruebas (Evaluación Examen)
-
-**Desarrollado por:** Henrik Anderson Oloroso García
-
-### 1. Modificaciones a la Lógica de Negocio
-* **Nueva Opción del Menú:** En el nodo `Switch` principal de enrutamiento, se integró una rama adicional para la opción **Ver y actualizar mis tutorías**, permitiendo consultar el estado actual y gestionar las asesorías agendadas.
-* **Sistema de Puntos y Balance Académico:**
-  * **Hoja `SESSIONS`:** Se incorporó la columna `balance_actual`, encargada de acumular el total de puntos obtenidos por el alumno al finalizar sus asesorías.
-  * **Hoja `TUTORIAS`:** Se añadió la columna `puntos`, que almacena la puntuación asignada por materia a la cual se inscribió el estudiante. Al cambiar el estado a `Finalizada`, los puntos de dicha tutoría se acreditan al `balance_actual` del usuario en la sesión.
-* **Integración de IA (Agente Inteligente):** Se integró un nodo `AI Agent` impulsado por **Google Gemini Chat Model** y soportado por `Simple Memory`, permitiendo responder consultas complejas o guiar al usuario fuera de la secuencia estática cuando la condición general se cumple.
----
-
 ## 💻 Funcionalidades Principales
 
 | Opción | Comando / Menú | Acción Ejecutada |
@@ -58,6 +46,7 @@
 | **2️⃣** | **Ver/Actualizar tutorías** | Consulta las tutorías asociadas al estudiante y permite gestionar actualizaciones. |
 | **3️⃣** | **Cancelar tutoría** | Permite dar de baja tutorías en estado `Por iniciar` o `En progreso`. |
 | **4️⃣** | **Finalizar tutoría** | Marca la clase como `Finalizada`, liberando al tutor e incrementando el `balance_actual` de puntos del estudiante. |
+| **5️⃣** | **Ver y actualizar mis puntos** | Actualiza la `base de datos` con los puntos totales acorde a su materia finalizada|
 
 ---
 
